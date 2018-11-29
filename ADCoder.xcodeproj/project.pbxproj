@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A139378321AFD24600B0B8DE /* ADClassBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A139378221AFD24600B0B8DE /* ADClassBuilder.m */; };
 		A1CA508821AE41CF00AF4F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA508721AE41CF00AF4F1F /* main.m */; };
 		A1CA509021AE6DF300AF4F1F /* ADPropertyLazyGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CA508F21AE6DF300AF4F1F /* ADPropertyLazyGetter.m */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A139378121AFD24600B0B8DE /* ADClassBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADClassBuilder.h; sourceTree = "<group>"; };
+		A139378221AFD24600B0B8DE /* ADClassBuilder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADClassBuilder.m; sourceTree = "<group>"; };
 		A1CA508421AE41CF00AF4F1F /* ADCoder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ADCoder; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1CA508721AE41CF00AF4F1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A1CA508E21AE6DF300AF4F1F /* ADPropertyLazyGetter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADPropertyLazyGetter.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				A1CA508721AE41CF00AF4F1F /* main.m */,
 				A1CA508E21AE6DF300AF4F1F /* ADPropertyLazyGetter.h */,
 				A1CA508F21AE6DF300AF4F1F /* ADPropertyLazyGetter.m */,
+				A139378121AFD24600B0B8DE /* ADClassBuilder.h */,
+				A139378221AFD24600B0B8DE /* ADClassBuilder.m */,
 			);
 			path = ADCoder;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A139378321AFD24600B0B8DE /* ADClassBuilder.m in Sources */,
 				A1CA509021AE6DF300AF4F1F /* ADPropertyLazyGetter.m in Sources */,
 				A1CA508821AE41CF00AF4F1F /* main.m in Sources */,
 			);
