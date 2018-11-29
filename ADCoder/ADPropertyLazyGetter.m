@@ -53,6 +53,28 @@
     return _%@;\n\
 }\n\n"
 
+#define ADPropertyLazyGetterFormatUITableView @"\
+- (%@)%@\n\
+{\n\
+    if (!_%@) {\n\
+        _%@ = [[%@ alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];\n\
+        _%@.dataSource = self;\n\
+        _%@.delegate = self;\n\
+        _%@.backgroundColor = [UIColor clearColor];\n\
+        _%@.separatorStyle = UITableViewCellSeparatorStyleNone;\n\
+        _%@.estimatedRowHeight = 0;\n\
+        _%@.estimatedSectionHeaderHeight = 0;\n\
+        _%@.estimatedSectionFooterHeight = 0;\n\
+        [_%@ registerClass:[UITableViewCell class] forCellReuseIdentifier:@\"\"];\n\
+        if (@available(iOS 11.0, *)) {\n\
+            _%@.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;\n\
+        } else {\n\
+            self.automaticallyAdjustsScrollViewInsets = NO;\n\
+        }\n\
+    }\n\
+    return _%@;\n\
+}\n\n"
+
 #import "ADPropertyLazyGetter.h"
 
 @implementation ADPropertyLazyGetter
@@ -71,6 +93,9 @@
     }
     if ([className containsString:@"UITextField"]) {
         return [NSString stringWithFormat:ADPropertyLazyGetterFormatUITextField, classNameFull, propertyName, propertyName, propertyName, className, propertyName, propertyName, propertyName, propertyName, propertyName];
+    }
+    if ([className containsString:@"UITableView"]) {
+        return [NSString stringWithFormat:ADPropertyLazyGetterFormatUITableView, classNameFull, propertyName, propertyName, propertyName, className, propertyName, propertyName, propertyName, propertyName, propertyName, propertyName, propertyName, propertyName, propertyName, propertyName];
     }
     return [NSString stringWithFormat:ADPropertyLazyGetterFormatCommon, classNameFull, propertyName, propertyName, propertyName, className, propertyName];
 }
@@ -96,6 +121,7 @@ SCANF_PATH:
         return;
     }
     NSArray *lines = [content componentsSeparatedByString:@"\n"];
+    NSMutableString *result = [[NSMutableString alloc] init];
     for (NSString *line in lines) {
         if ([line containsString:@"@property"]) {
             NSUInteger index = [line rangeOfString:@")"].location;
@@ -107,18 +133,12 @@ SCANF_PATH:
                 if (tmp.count != 2) {
                     return;
                 }
-                NSFileManager *fm = [NSFileManager defaultManager];
-                NSString *resultPath = [[pathString stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"result.txt"];
-                if (![fm fileExistsAtPath:resultPath]) {
-                    [fm createFileAtPath:resultPath contents:nil attributes:[fm attributesOfItemAtPath:pathString error:nil]];
-                }
-                NSFileHandle *resultHandle = [NSFileHandle fileHandleForWritingAtPath:resultPath];
-                [resultHandle seekToEndOfFile];
                 NSString *getterString = [self _getterStringWithClassName:tmp.firstObject propertyName:tmp.lastObject isObject:isObject];
-                [resultHandle writeData:[getterString dataUsingEncoding:NSUTF8StringEncoding]];
+                [result appendString:getterString];
             }
         }
     }
+    NSLog(@"\n\n<============== result begin ==============>\n\n%@<============== result end ==============>\n", result);
 }
 
 @end
